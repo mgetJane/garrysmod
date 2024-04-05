@@ -248,7 +248,7 @@ local function SearchInfoController(search, dactive, dtext)
           end
 end
 
-local function ShowSearchScreen(search_raw)
+function GAMEMODE:TTTShowSearchScreen(search_raw)
    local client = LocalPlayer()
    if not IsValid(client) then return end
 
@@ -491,7 +491,7 @@ local function ReceiveRagdollSearch()
    hook.Call("TTTBodySearchEquipment", nil, search, eq)
 
    if search.show then
-      ShowSearchScreen(search)
+      hook.Run("TTTShowSearchScreen", search)
    end
 
    StoreSearchResult(search)
