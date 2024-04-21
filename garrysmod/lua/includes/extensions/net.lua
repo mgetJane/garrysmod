@@ -54,22 +54,11 @@ end
 -- Read/Write an entity to the stream
 --
 function net.WriteEntity( ent )
-
-	if ( !IsValid( ent ) ) then
-		net.WriteUInt( 0, MAX_EDICT_BITS )
-	else
-		net.WriteUInt( ent:EntIndex(), MAX_EDICT_BITS )
-	end
-
+	net.WriteUInt( IsValid( ent ) and ent:EntIndex() or 0, MAX_EDICT_BITS )
 end
 
 function net.ReadEntity()
-
-	local i = net.ReadUInt( MAX_EDICT_BITS )
-	if ( !i ) then return end
-
-	return Entity( i )
-
+	return Entity( net.ReadUInt( MAX_EDICT_BITS ) )
 end
 
 
